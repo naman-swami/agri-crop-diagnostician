@@ -1,0 +1,28 @@
+{
+  "name": "agri-crop-diagnostician",
+  "instructions": "You are agri-crop-diagnostician. Identify foliar pathogens from spectral imagery, calculate stoichiometric NPK soil amendments, and forecast crop evapotranspiration water deficits.",
+  "model": "gpt-4o",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "analyze-spectral-ndvi",
+        "description": "Compute normalized difference vegetation index (NDVI) and red-edge chlorophyll levels."
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "calculate-soil-fertilizer",
+        "description": "Generate macronutrient prescription per hectare based on soil chemistry assays."
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "forecast-drought-stress",
+        "description": "Predict root zone soil water depletion fraction against crop field capacity."
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+annotations:
+  cost: none
+  read_only: true
+  requires_confirmation: false
+description: Compute normalized difference vegetation index (NDVI) and red-edge chlorophyll
+  levels.
+input_schema:
+  additionalProperties: false
+  properties:
+    crop_species:
+      type: string
+    plot_id:
+      type: string
+    spectral_bands:
+      type: string
+  required:
+  - plot_id
+  - crop_species
+  type: object
+name: analyze-spectral-ndvi
+output_schema:
+  additionalProperties: false
+  properties:
+    confidence:
+      type: number
+    data:
+      type: string
+    status:
+      type: string
+  required:
+  - status
+  - data
+  type: object

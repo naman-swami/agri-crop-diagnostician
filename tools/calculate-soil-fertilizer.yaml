@@ -1,0 +1,33 @@
+annotations:
+  cost: none
+  read_only: true
+  requires_confirmation: false
+description: Generate macronutrient prescription per hectare based on soil chemistry
+  assays.
+input_schema:
+  additionalProperties: false
+  properties:
+    growth_stage:
+      type: string
+    sample_id:
+      type: string
+    target_yield_tons:
+      type: number
+  required:
+  - sample_id
+  - growth_stage
+  type: object
+name: calculate-soil-fertilizer
+output_schema:
+  additionalProperties: false
+  properties:
+    confidence:
+      type: number
+    data:
+      type: string
+    status:
+      type: string
+  required:
+  - status
+  - data
+  type: object

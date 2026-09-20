@@ -1,15 +1,23 @@
 ---
 name: foliar-pathology-screening
-description: "Extracting visual necrotic lesions and chlorosis patterns to distinguish Cercospora from Septoria and rust strains."
-version: "0.1.0"
+description: Extracting necrotic lesion characteristics to distinguish fungal and bacterial blight strains.
 ---
 
 # foliar-pathology-screening
 
-## Objective
-Extracting visual necrotic lesions and chlorosis patterns to distinguish Cercospora from Septoria and rust strains.
+## Procedure
+1. Parse incoming domain input and identify critical parameters.
+2. Cross-reference with standard operational baselines.
+3. Perform step-by-step evaluation using first-principles logic.
+4. Verify edge cases and consistency constraints.
+5. Emit structured JSON output report.
 
-## Implementation Procedure
-1. Parse incoming parameters and check domain preconditions.
-2. Apply validated transformation pipelines and mathematical heuristics.
-3. Formulate structured output objects containing confidence metrics and audit traces.
+## Output Contract
+```json
+{
+  "skill": "foliar-pathology-screening",
+  "status": "completed",
+  "confidence": 0.95,
+  "findings": []
+}
+```

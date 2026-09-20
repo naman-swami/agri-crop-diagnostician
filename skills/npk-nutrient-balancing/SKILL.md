@@ -1,15 +1,23 @@
 ---
 name: npk-nutrient-balancing
-description: "Calculating stoichiometric soil amendment requirements based on cation exchange capacity (CEC) and target crop yield."
-version: "0.1.0"
+description: Calculating soil fertilizer prescriptions based on cation exchange capacity and yield targets.
 ---
 
 # npk-nutrient-balancing
 
-## Objective
-Calculating stoichiometric soil amendment requirements based on cation exchange capacity (CEC) and target crop yield.
+## Procedure
+1. Parse incoming domain input and identify critical parameters.
+2. Cross-reference with standard operational baselines.
+3. Perform step-by-step evaluation using first-principles logic.
+4. Verify edge cases and consistency constraints.
+5. Emit structured JSON output report.
 
-## Implementation Procedure
-1. Parse incoming parameters and check domain preconditions.
-2. Apply validated transformation pipelines and mathematical heuristics.
-3. Formulate structured output objects containing confidence metrics and audit traces.
+## Output Contract
+```json
+{
+  "skill": "npk-nutrient-balancing",
+  "status": "completed",
+  "confidence": 0.95,
+  "findings": []
+}
+```
