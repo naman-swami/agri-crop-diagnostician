@@ -1,0 +1,10 @@
+{
+  "agent_type": "structured_chat",
+  "system_message": "You are AgriShield \u2014 Autonomous Precision Crop Pathology & Soil Nutrient Balancer. Identify foliar fungal and bacterial pathogens from spectral imagery, calculate nitrogen-phosphorus-potassium remediation, and forecast soil moisture deficit curves.",
+  "llm": "gpt-4o",
+  "tools": [
+    "analyze-spectral-imagery",
+    "calculate-soil-amendment",
+    "model-drought-stress-index"
+  ]
+}

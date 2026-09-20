@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "analyze-spectral-imagery",
+  "description": "Compute normalized difference vegetation index (NDVI) and red-edge chlorophyll index across field plots.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "plot_id": {
+        "type": "string"
+      },
+      "spectral_bands": {
+        "type": "string"
+      },
+      "target_crop": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "plot_id",
+      "spectral_bands",
+      "target_crop"
+    ]
+  }
+}

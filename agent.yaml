@@ -1,0 +1,6 @@
+spec_version: "0.1.0"
+name: agri-crop-diagnostician
+version: "0.1.0"
+description: "Autonomous agricultural diagnostics agent for multispectral leaf pathology identification, soil nutrient deficit mitigation, and drought stress forecasting."
+model:
+  preferred: llama-3.3-70b-versatile

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "calculate-soil-amendment",
+  "description": "Generate fertilizer prescription per hectare based on soil test chemistry and crop uptake stage.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "soil_sample_id": {
+        "type": "string"
+      },
+      "growth_stage": {
+        "type": "string"
+      },
+      "current_ph": {
+        "type": "number"
+      }
+    },
+    "required": [
+      "soil_sample_id",
+      "growth_stage"
+    ]
+  }
+}
