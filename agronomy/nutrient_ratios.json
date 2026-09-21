@@ -1,0 +1,6 @@
+{
+  "crop_coefficients": {
+    "wheat": {"n_kg_ton": 24.0, "p_kg_ton": 8.5, "k_kg_ton": 18.0},
+    "corn": {"n_kg_ton": 22.0, "p_kg_ton": 9.0, "k_kg_ton": 19.5}
+  }
+}

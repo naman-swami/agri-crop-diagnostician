@@ -57,7 +57,7 @@ agri-crop-diagnostician/
 │   └── fao56_evapotranspiration.md  # Agronomic standards reference
 ├── tests/
 │   └── test_agent.py                # Agronomic test suite
-├── main.py                          # Precision agriculture CLI
+├── diagnose.py                          # Precision agriculture CLI
 └── requirements.txt
 ```
 
@@ -68,5 +68,5 @@ agri-crop-diagnostician/
 pytest tests/ -v
 
 # Audit sample field survey
-python main.py --demo
+python diagnose.py --demo
 ```
