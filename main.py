@@ -1,22 +1,33 @@
-import json
 import argparse
-from src.crop_engine import PrecisionAgriEngine
+import json
+import os
+from indices.spectral_indices import SpectralIndexCalculator
+from agronomy.fertilizer_stoichiometry import SoilNutrientEngine
 
 def main():
-    parser = argparse.ArgumentParser(description="AgriCrop Precision Diagnostic CLI")
-    parser.add_argument("--demo", action="store_true", help="Run simulated foliar pathology and soil nutrient audit")
+    parser = argparse.ArgumentParser(description="AgriCrop Precision Diagnostics CLI")
+    parser.add_argument("--demo", action="store_true", help="Audit sample drone field survey")
     args = parser.parse_args()
 
-    engine = PrecisionAgriEngine()
-    ndvi_report = engine.compute_ndvi(nir_reflectance=0.62, red_reflectance=0.18)
-    npk_report = engine.calculate_npk_fertilizer(current_n=45.0, current_p=12.0, current_k=65.0, target_yield_tons=6.5)
+    data_file = os.path.join(os.path.dirname(__file__), "fixtures", "field_surveys", "sample_field_data.json")
 
-    report = {"spectral_analysis": ndvi_report, "nutrient_amendment": npk_report}
-    print("="*60)
-    print(" AGRISHIELD PRECISION CROP AUDIT REPORT")
-    print("="*60)
-    print(json.dumps(report, indent=2))
-    print("="*60)
+    if args.demo:
+        with open(data_file, "r") as f:
+            plots = json.load(f)
+        print("=== AGRICROP PRECISION FOLIAR & SOIL DIAGNOSTIC REPORT ===\n")
+        for p in plots:
+            ndvi_res = SpectralIndexCalculator.calculate_ndvi(p["nir"], p["red"])
+            ndwi_res = SpectralIndexCalculator.calculate_ndwi(p["nir"], p["swir"])
+            fert_res = SoilNutrientEngine.calculate_npk_prescription(
+                p["soil_n_kg_ha"], p["soil_p_kg_ha"], p["soil_k_kg_ha"], p["target_yield_t_ha"]
+            )
+            print(f"Plot: {p['plot_id']} ({p['crop']}) | Target Yield: {p['target_yield_t_ha']} t/ha")
+            print(f"  NDVI: {ndvi_res['ndvi']} ({ndvi_res['health_status']}) | NDWI: {ndwi_res['ndwi']} ({ndwi_res['water_status']})")
+            print(f"  Nutrient Deficits: N={fert_res['deficits_kg_ha']['nitrogen']}kg, P={fert_res['deficits_kg_ha']['phosphorus']}kg, K={fert_res['deficits_kg_ha']['potassium']}kg")
+            print(f"  Prescription: {fert_res['recommendation']}")
+            print("-" * 50)
+    else:
+        parser.print_help()
 
 if __name__ == "__main__":
     main()

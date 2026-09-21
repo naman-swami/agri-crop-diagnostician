@@ -1,0 +1,24 @@
+[
+  {
+    "plot_id": "PLOT-A1",
+    "crop": "WHEAT",
+    "nir": 0.72,
+    "red": 0.12,
+    "swir": 0.28,
+    "soil_n_kg_ha": 45.0,
+    "soil_p_kg_ha": 18.0,
+    "soil_k_kg_ha": 60.0,
+    "target_yield_t_ha": 5.5
+  },
+  {
+    "plot_id": "PLOT-B2",
+    "crop": "CORN",
+    "nir": 0.38,
+    "red": 0.32,
+    "swir": 0.4,
+    "soil_n_kg_ha": 20.0,
+    "soil_p_kg_ha": 10.0,
+    "soil_k_kg_ha": 30.0,
+    "target_yield_t_ha": 8.0
+  }
+]
