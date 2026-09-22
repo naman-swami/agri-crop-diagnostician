@@ -1,72 +1,58 @@
-# AgriCrop Precision Foliar Diagnostician
+# Agri Crop Diagnostician & Agronomy Oracle
 
-[![OpenGAP](https://img.shields.io/badge/OpenGAP-0.1.0-blue.svg)](agent.yaml)
-[![AgriTech](https://img.shields.io/badge/Domain-Precision_Agriculture_Remote_Sensing-darkgreen.svg)](docs/fao56_evapotranspiration.md)
-[![Standard](https://img.shields.io/badge/Model-FAO--56_Agronomy-green.svg)](docs/fao56_evapotranspiration.md)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](requirements.txt)
-[![CI](https://img.shields.io/badge/CI-Passing-brightgreen.svg)](.github/workflows/ci.yml)
+> **Precision Agriculture Engine: Multispectral Canopy Indices & Soil Stoichiometry**  
+> Calculating NDVI/NDWI Vegetation Stress and Computing Precise NPK Fertilizer Prescriptions.
 
-A precision agricultural remote sensing and foliar diagnostics platform calculating multispectral NDVI/NDWI canopy health indices and stoichiometric NPK fertilizer prescriptions.
+---
 
-```
-                    ┌─────────────────────────┐
-                    │ Multispectral Reflectance│
-                    │   (NIR, RED, SWIR)      │
-                    └────────────┬────────────┘
-                                 │
-                                 ▼
-                    ┌─────────────────────────┐
-                    │ indices/spectral_indices│
-                    └────────────┬────────────┘
-                                 │
-                 ┌───────────────┴───────────────┐
-                 ▼                               ▼
-      ┌─────────────────────┐         ┌─────────────────────┐
-      │  NDVI Canopy Health │         │  NDWI Water Stress  │
-      │ (Vigorous / Sparse) │         │ (Hydration Deficit) │
-      └──────────┬──────────┘         └──────────┬──────────┘
-                 │                               │
-                 └───────────────┬───────────────┘
-                                 ▼
-                    ┌─────────────────────────┐
-                    │ Prescription Blend Plan │
-                    │ (Urea, DAP, MOP kg/ha)  │
-                    └─────────────────────────┘
-```
+### Remote Sensing Spectral Formulations
 
-## Features
+Canopy indices are calculated from Sentinel-2 / Landsat multispectral reflectance bands:
 
-- **Multispectral Canopy Analysis**: Calculates precision NDVI and NDWI indices to evaluate foliar health and hydration stress.
-- **Stoichiometric Fertilizer Optimization**: Prescribes exact Urea, DAP, and MOP kilograms per hectare required for target yields.
-- **Agricultural Field Fixtures**: Pre-packaged with multispectral drone sensor survey datasets.
+$$NDVI = \frac{NIR - RED}{NIR + RED} \quad \left(\text{Healthy Vigorous Vegetation: } 0.60 - 0.90\right)$$
+$$NDWI = \frac{NIR - SWIR}{NIR + SWIR} \quad \left(\text{Canopy Water Deficit: } < 0.20\right)$$
 
-## Directory Structure
+---
 
-```
-agri-crop-diagnostician/
-├── agent.yaml                       # OpenGAP 0.1.0 Manifest
-├── EXPLAINABILITY.md                # 7-checkpoint agronomic provenance
-├── indices/
-│   └── spectral_indices.py          # NDVI & NDWI spectral calculator
-├── agronomy/
-│   └── fertilizer_stoichiometry.py  # NPK nutrient balance engine
-├── fixtures/
-│   └── field_surveys/
-│       └── sample_field_data.json   # Benchmark drone survey data
-├── docs/
-│   └── fao56_evapotranspiration.md  # Agronomic standards reference
-├── tests/
-│   └── test_agent.py                # Agronomic test suite
-├── diagnose.py                          # Precision agriculture CLI
-└── requirements.txt
+### Soil Stoichiometric Amendment Engine
+
+Fertilizer prescriptions (`agronomy/fertilizer_stoichiometry.py`) reconcile soil nutrient deficiencies against crop-specific uptake targets:
+
+| Fertilizer Carrier | Active Nutrient Content | Calculation Formulation |
+| :--- | :--- | :--- |
+| **Urea** | $46\% \text{ Nitrogen } (N)$ | $\text{Urea (kg/ha)} = \frac{\Delta N}{0.46}$ |
+| **Diammonium Phosphate (DAP)** | $18\% N, 46\% P_2O_5$ | $\text{DAP (kg/ha)} = \frac{\Delta P_2O_5}{0.46}$ |
+| **Muriate of Potash (MOP)** | $60\% K_2O$ | $\text{MOP (kg/ha)} = \frac{\Delta K_2O}{0.60}$ |
+
+---
+
+### Field Survey Diagnostic Output
+
+```console
+$ python diagnose.py --demo
+============================================================
+AGRONOMIC FIELD DIAGNOSTIC REPORT: Parcel #NE-402
+Crop: Zea mays (Maize) | Growth Stage: V6 Vegetative
+============================================================
+* Measured NDVI: 0.38 (Severe Chlorosis / Canopy Stunting)
+* Measured NDWI: 0.12 (Moderate Water Stress)
+* Soil Nitrogen Deficit: 45.0 kg N / hectare
+* Prescribed Amendment:
+  - Apply 97.8 kg/ha Urea via split side-dressing
+  - Schedule 35mm drip irrigation cycle within 48 hours
+============================================================
 ```
 
-## Quick Start
+---
+
+### Agronomic Operations CLI
 
 ```bash
-# Run agronomic test suite
-pytest tests/ -v
-
-# Audit sample field survey
+# Run diagnostics on sample field surveys
 python diagnose.py --demo
+
+# Validate agronomy stoichiometry unit tests
+pytest tests/ -v
 ```
+
+Field data contracts, FAO-56 irrigation standards, and agronomic guidelines are detailed in [AGRONOMY_STANDARDS.md](AGRONOMY_STANDARDS.md).
